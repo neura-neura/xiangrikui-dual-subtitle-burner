@@ -499,9 +499,10 @@ class MainWindow(QMainWindow):
         except Exception:
             return 0.0
 
-    def handle_export_stderr(self, progress: QProgressDialog):
+    def handle_export_stderr(self, progress):
         data = self.export_process.readAllStandardError().data().decode('utf-8', errors='ignore')
-        for line in data.splitlines():
+        lines = data.splitlines()
+        for line in lines:
             if "time=" in line:
                 time_str = line.split("time=")[1].split(" ")[0]
                 try:
@@ -516,9 +517,9 @@ class MainWindow(QMainWindow):
     def on_export_finished(self, exit_code, exit_status, progress: QProgressDialog, out_path: str, temp_sub1: str, temp_sub2: str):
         progress.close()
         self.export_process = None
-        if os.path.exists(temp_sub1):
+        if temp_sub1 and os.path.exists(temp_sub1):
             os.remove(temp_sub1)
-        if os.path.exists(temp_sub2):
+        if temp_sub2 and os.path.exists(temp_sub2):
             os.remove(temp_sub2)
         if exit_code == 0:
             QMessageBox.information(self, "Success", "Video exported successfully.")
@@ -607,14 +608,10 @@ class MainWindow(QMainWindow):
 
         self.export_process = QProcess(self)
         self.export_process.readyReadStandardError.connect(lambda: self.handle_export_stderr(progress))
-        self.export_process.finished.connect(lambda code, status: self.on_export_finished(code, status, progress, out_path, temp_sub1 or "", temp_sub2 or ""))
+        self.export_process.finished.connect(lambda code, status: self.on_export_finished(code, status, progress, out_path, temp_sub1, temp_sub2))
         progress.canceled.connect(self.export_process.kill)
 
-        # Ocultar ventana en Windows para el proceso de exportación
-        if platform.system() == 'Windows':
-            self.export_process.startDetached(cmd[0], cmd[1:], creationFlags=CREATE_NO_WINDOW)
-        else:
-            self.export_process.start(cmd[0], cmd[1:])
+        self.export_process.start(cmd[0], cmd[1:])
 
     def export_video(self):
         """Exports the full video with burned-in subtitles."""
