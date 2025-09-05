@@ -27,6 +27,7 @@ This tool is built for personal video editing needs, such as adding bilingual su
   - None (both subtitles, default margins).
   - Chinese video (only Subtitle 2, adjusted margin).
   - English video (only Subtitle 1, adjusted margin).
+  - No subtitles (only Subtitle 2, adjusted margin, useful in case you want to burn just one subtitle).
 - Export full video or 10-second previews with burned-in subtitles using FFmpeg (supports hardware acceleration if available).
 - Preview export from current playback position.
 - Error handling for codec issues and missing dependencies.
