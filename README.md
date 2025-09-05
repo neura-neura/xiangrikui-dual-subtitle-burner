@@ -9,7 +9,7 @@
 
 This tool is built for personal video editing needs, such as adding bilingual subtitles to educational or entertainment content.
 
-⚠️ **NOTE**: This application is currently in BETA version (v0.1). Although the main functionality is stable, there may be some issues or limitations.
+⚠️ **NOTE**: This application is currently in BETA version. Although the main functionality is stable, there may be some issues or limitations.
 </div>
 <br>
 <div align="center">
