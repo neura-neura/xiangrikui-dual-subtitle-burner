@@ -359,6 +359,10 @@ class MainWindow(QMainWindow):
         english_preset_action.triggered.connect(lambda: self.set_preset("english"))
         presets_menu.addAction(english_preset_action)
 
+        nosubs_preset_action = QAction("Video without subtitles (only Subtitle 2)", self)
+        nosubs_preset_action.triggered.connect(lambda: self.set_preset("nosubs"))
+        presets_menu.addAction(nosubs_preset_action)
+
     def set_preset(self, preset: str):
         """Adjusts margins and enables/disables options according to the selected preset."""
         self.current_preset = preset
@@ -389,6 +393,15 @@ class MainWindow(QMainWindow):
             self.sub2_settings_action.setEnabled(False)
             self.subs2 = None  # Reset subtitle 2
             self.sub2_item.setPlainText("")  # Clear text
+        elif preset == "nosubs":
+            self.sub2_margin = 5
+            self.sub2_style.marginv = self.sub2_margin
+            self.load_sub1_action.setEnabled(False)
+            self.load_sub2_action.setEnabled(True)
+            self.sub1_settings_action.setEnabled(False)
+            self.sub2_settings_action.setEnabled(True)
+            self.subs1 = None  # Reset subtitle 1
+            self.sub1_item.setPlainText("")  # Clear text
         # Update preview if necessary
         self.update_subtitles(self.player.position())
 
