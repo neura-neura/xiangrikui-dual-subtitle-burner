@@ -34,6 +34,7 @@ This tool is built for personal video editing needs, such as adding bilingual su
 
 ## Installation
 
+> If you are using the compiled version in [releases](https://github.com/neura-neura/xiangrikui-dual-subtitle-burner/releases), jump to step 3; if you want to compile the source code, start with the step 1.
 1. Install Python (version 3.8 or higher recommended).
 2. Install the necessary libraries via pip:
    ```
@@ -52,7 +53,7 @@ This tool is built for personal video editing needs, such as adding bilingual su
    ```
    python main.py
    ```
-   Or use the compiled .exe if available.
+   Or use the compiled .exe in [releases](https://github.com/neura-neura/xiangrikui-dual-subtitle-burner/releases).
 
 2. Load a video file via "File > Load Video".
 3. Load subtitles via "File > Load Subtitle 1" and/or "Load Subtitle 2".
